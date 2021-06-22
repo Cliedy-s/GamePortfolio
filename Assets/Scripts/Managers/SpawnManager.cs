@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager instance;
 
     // private
-    float sum = 0f;
+    // float sum = 0f;
     const float genTime = 2f;
     const ushort MAX_COUNT = 5;
 

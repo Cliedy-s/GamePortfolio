@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // 
-    Player player;
+    public Player player;
     List<Monster> monsters = new List<Monster>();
     
     public Player Player { get => player; set => player = value; }
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
         SoundManager.instance.LoadBGM();
         SoundManager.instance.LoadFx();
+        CustomCamera cam = Camera.main.gameObject.AddComponent<CustomCamera>();
+        cam.Player = player.transform;
     }
     void Start()
     {

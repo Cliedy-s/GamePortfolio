@@ -14,22 +14,23 @@ public class Player : MonoBehaviour
 
     private float v = 0f;
     private float h = 0f;
+    public float hp = 100f;
     private bool defence = false;
     private bool attack = false;
+    private bool tryJump = false;
     public float V { get => v; }
     public float H { get => h; }
     public bool Defence { get => defence; }
     public bool Attack { get => attack; }
-
-    public float hp = 100f;
-    public bool ISDEAD { 
-        get {
-            if(hp <= 0) return true;
+    public bool TryJump { get => tryJump; set => tryJump = value; }
+    public bool ISDEAD
+    {
+        get
+        {
+            if (hp <= 0) return true;
             return false;
-        } 
+        }
     }
-
-    
 
     int layermask;
 
