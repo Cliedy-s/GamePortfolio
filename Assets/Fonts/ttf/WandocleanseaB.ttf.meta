@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 9ca51e31c2b77b74ba616e1c24a17aed
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Wandocleansea
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f9d627ace65dc8d42b43b0ef7cddcf16, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
