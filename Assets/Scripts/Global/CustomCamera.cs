@@ -8,10 +8,10 @@ public class CustomCamera : MonoBehaviour
     private Transform player;
     public Transform Player { get => player; set => player = value; }
     Vector3 playeroldpos = Vector3.zero;
-    const float zdelta = -11.020f;
-    const float ydelta = 2.32f;
-    const float xdelta = -51.09f;
-    const float xangle = 10f;
+    const float zdelta = -4.42f;
+    const float ydelta = 0.86f;
+    const float xdelta = -16.12f;
+    const float xangle = 20f;
 
     void Start()
     {

@@ -23,6 +23,14 @@ public class AniDogIdle : AniDogBase
         {
             animator.SetInteger("aniIndex", 7);
         }
+        if (player.IsTryJump)
+        {
+            animator.SetInteger("aniIndex", 5);
+        }
+        if (player.IsTryRoll)
+        {
+            animator.SetInteger("aniIndex", 8);
+        }
     }
     override public void StateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
