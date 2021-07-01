@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class TrollAttack : MonoBehaviour
 {
-    // unity functions
-    void Start()
+    public TrollGiant troll;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (troll.IsTryHit)
+            troll.OnAttack(other);
     }
-    void Update()
-    {
-        
-    }
-    // custom functions
 }

@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class TrollGiant : NavMonster
 {
+
     // unity functions
     public override void RunAwake()
     {
@@ -12,7 +14,7 @@ public class TrollGiant : NavMonster
     }
     public override void RunUpdate()
     {
-        DetectPlayer();
+        AttackWhenClose();
     }
 
     // custom functions
