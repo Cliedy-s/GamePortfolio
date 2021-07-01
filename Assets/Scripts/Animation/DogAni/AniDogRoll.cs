@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AniDogRoll : AniDogBase
 {
     public override void StateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        player.TryDodge();
     }
 
     public override void StateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        player.StopPlayerCoroutine(Coroutines.Dodge);
     }
 
     public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

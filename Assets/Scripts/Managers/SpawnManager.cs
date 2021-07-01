@@ -41,17 +41,17 @@ public class SpawnManager : MonoBehaviour
 
     // Custom Fuctions
     public GameObject monsterParent;
-    Monster CreateMonster(string mobname, string tag, int cnt = 1)
+    NavMonster CreateMonster(string mobname, string tag, int cnt = 1)
     {
         if (GameManager.instance.Monsters.FindAll((x) => x.gameObject.activeSelf).Count >= cnt)
             return null;
 
-        Monster enableMob = GetEnableMonster();
+        NavMonster enableMob = GetEnableMonster();
         if (enableMob == null)
         {
             // GameObject tmp = resource.GetOther(mobname); 
             GameObject tmp = ResourceManager.instance.GetOther(mobname);
-            enableMob = Instantiate<GameObject>(tmp).AddComponent<Monster>();
+            enableMob = Instantiate<GameObject>(tmp).AddComponent<NavMonster>();
             enableMob.tag = tag;
             if(monsterParent != null)
                 enableMob.gameObject.transform.SetParent(monsterParent.transform);
@@ -60,7 +60,7 @@ public class SpawnManager : MonoBehaviour
         enableMob.gameObject.SetActive(true);
         return enableMob;
     }
-    private Monster GetEnableMonster()
+    private NavMonster GetEnableMonster()
     {
         return GameManager.instance.Monsters.Find((x) => !x.gameObject.activeSelf);
     }
@@ -75,8 +75,8 @@ public class SpawnManager : MonoBehaviour
     {
         try
         {
-            Monster disactivate = GameManager.instance.Monsters.Find(
-                (x) => x.Equals(col.gameObject.GetComponent<Monster>())
+            NavMonster disactivate = GameManager.instance.Monsters.Find(
+                (x) => x.Equals(col.gameObject.GetComponent<NavMonster>())
             );
             disactivate.gameObject.SetActive(false);
             return true;

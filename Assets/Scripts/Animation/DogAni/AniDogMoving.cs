@@ -36,7 +36,7 @@ public class AniDogMoving : AniDogBase
         {
             animator.SetInteger("aniIndex", 5);
         }
-        if (player.IsTryRoll)
+        if (player.IsTryDodge)
         {
             animator.SetInteger("aniIndex", 8);
         }

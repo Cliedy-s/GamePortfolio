@@ -6,21 +6,17 @@ public class AniDogAttack02 : AniDogBase
 {
     public override void StateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        player.SetAttack(true);
     }
 
     public override void StateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        player.SetAttack(false);
     }
 
     public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (player.Attack)
-        {
-            animator.SetInteger("aniIndex", 2);
-        }
-        else if (!player.Attack)
+        if (!player.Attack)
         {
             if (player.V == 0 && player.H == 0)
             {
@@ -34,10 +30,14 @@ public class AniDogAttack02 : AniDogBase
             {
                 animator.SetInteger("aniIndex", 5);
             }
-            if (player.IsTryRoll)
+            if (player.IsTryDodge)
             {
                 animator.SetInteger("aniIndex", 8);
             }
+        }
+        else if (player.Attack)
+        {
+            animator.SetInteger("aniIndex", 2);
         }
     }
 }
