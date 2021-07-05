@@ -2,6 +2,7 @@ using System;
 using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 
 public abstract class NavMonster : MonoBehaviour
 {
@@ -10,14 +11,13 @@ public abstract class NavMonster : MonoBehaviour
     public Player player;
 
     [Header("Settings")]
-    public float minDis = 5f;
+    public float minDis = 1f;
     public float maxDis = 10f;
     [Space(3f)]
     public float hitTime = 0.2f;
     public float hitDis = 1f;
     [Space(3f)]
     public int totalHp = 100;
-    public int hp = 100;
 
     protected Vector3 orgDir;
     // protected Vector3 beforeDir;
@@ -25,16 +25,25 @@ public abstract class NavMonster : MonoBehaviour
     protected float playerDis;
 
     private bool isMoving = false;
-    private bool isHit;
-    private bool isHitDis;
-    private bool isTryHit;
+    private bool isAttacked = false;
+    private bool isHitDis = false;
+    private bool isTryHit = false;
     private bool isDie = false;
+    private int hp = 100;
 
     public  bool IsMoving { get => isMoving; set => isMoving = value; }
-    public  bool IsHit    { get => isHit; set => isHit = value; }
+    public  bool IsAttacked { get => isAttacked; set => isAttacked = value; }
     public  bool IsHitDis { get => isHitDis; set => isHitDis = value; }
     public  bool IsTryHit { get => isTryHit; set => isTryHit = value; }
     public  bool IsDie    { get => isDie; set => isDie = value; }
+    public  int Hp { 
+        get {
+            return hp;
+        } 
+        set {
+            hp = value;
+        } 
+    }   
 
     // unity functions
     void Awake(){
@@ -54,34 +63,38 @@ public abstract class NavMonster : MonoBehaviour
     abstract public void RunUpdate();
 
     // custom functions
-    public void DetectPlayer(){ // 선제공격 따라가기
+    public    void DetectPlayer(){
         // 거리에 따른 따라가기
-        Vector3 minminVec = new Vector3(1, 1, 1);
         Vector3 targetDir = orgDir;
-
-        if (playerDis <= minDis)
-            targetDir = player.transform.position - minminVec;
-        else if (playerDis >= maxDis)
+        if(playerDis <= minDis){ // 공격범위
+            targetDir = transform.position;
+        }
+        else if (playerDis >= maxDis) { // 너무 멈 
             targetDir = orgDir;
-
-        MoveByNav(targetDir);
+        }
+        else if(playerDis <= maxDis){ // 따라가기
+            targetDir = player.transform.position;
+        }
+        // TODO -  트롤이 이상하게 움직임
+        if(targetDir == transform.position)
+            MovingPause();
+        else Moving();
+        SetDir(targetDir);
     }
-    private   void MoveByNav(Vector3 targetDir){
+    private   void SetDir(Vector3 targetDir){
         agent.destination = targetDir;
     }
     protected void MovingPause(){
-        // beforeDir = agent.destination;
-        agent.isStopped = true;
         IsMoving = false;
     }
-    protected void MovingResume(){
-        agent.isStopped = false;
+    protected void Moving(){
         IsMoving = true;
     }
-    protected void GotHit(){
-        IsHit = true;
+    protected void GotHit(int hpPoint){
+        IsAttacked = true;
         MovingPause();
-        if(hp <= 0){
+        Hp = Hp - hpPoint;
+        if(Hp <= 0){
             Invoke("Die", hitTime);
             IsDie = true;
             return;
@@ -89,10 +102,10 @@ public abstract class NavMonster : MonoBehaviour
         Invoke("GotHitRecover", hitTime);
     }
     private   void GotHitRecover(){
-        IsHit = false;
-        MovingResume();
+        IsAttacked = false;
+        Moving();
     }
-    protected void TryAttack(){
+    protected void TryAttackWhenClose(){
         isHitDis = false;
         if (playerDis <= hitDis){
             isHitDis = true;
@@ -102,14 +115,19 @@ public abstract class NavMonster : MonoBehaviour
         if(other.gameObject.tag == "Monster")
             Debug.Log($"Attack : {other.gameObject.name}");
     }
+    public    void OnAttacked(Collider other){
+
+    }
     protected void Die(){
         IsDie = true;
     }
-    protected void AttackWhenClose()
-    {
-
+   // Events
+    private   void OnCollisionEnter(Collision other) {
+        Debug.Log("attaced...?");
+        if(other.gameObject.tag == "Weapon"){
+            Debug.Log("Attacked!");
+        }
     }
-    // Events
 
 }
 

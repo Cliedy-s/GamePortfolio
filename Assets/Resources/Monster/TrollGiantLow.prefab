@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 697685097045449739}
   - component: {fileID: 6867567437026920049}
-  - component: {fileID: 1159661929}
   - component: {fileID: 1159661926}
   - component: {fileID: 5008170657704403706}
   m_Layer: 0
@@ -87,19 +86,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &1159661929
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208709617910941361}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3673668, y: 1.7534513, z: 1}
-  m_Center: {x: 0.006761551, y: 0.8711777, z: 0}
 --- !u!195 &1159661926
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -109,7 +95,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 208709617910941361}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.57
   m_Speed: 1.2
   m_Acceleration: 1000
   avoidancePriority: 50
@@ -118,7 +104,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -138,6 +124,10 @@ MonoBehaviour:
   player: {fileID: 0}
   minDis: 5
   maxDis: 10
+  minminDis: 1.5
+  hitTime: 0.2
+  hitDis: 1
+  totalHp: 100
 --- !u!1 &235671963245377423
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7992762606772872157}
   - component: {fileID: 1024135635}
-  - component: {fileID: 1024135634}
+  - component: {fileID: 1473657464872294512}
   m_Layer: 0
   m_Name: Bip001 R Forearm
   m_TagString: Untagged
@@ -736,7 +726,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.94600046, y: 0.39563656, z: 0.39732012}
   m_Center: {x: -0.14996722, y: -0.088609286, z: 0.05314025}
---- !u!114 &1024135634
+--- !u!114 &1473657464872294512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -748,6 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d539406a5fa754fafe3d9c1df9ddc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  troll: {fileID: 5008170657704403706}
 --- !u!1 &3662335467214911154
 GameObject:
   m_ObjectHideFlags: 0

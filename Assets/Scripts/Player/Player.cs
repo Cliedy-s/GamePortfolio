@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
@@ -9,16 +10,18 @@ public class Player : MonoBehaviour
     public Animator animator;
     public Rigidbody playerRigid;
     public DogAttack attackScript;
+    public NavMeshAgent agent;
     [Header("Speeds")]
     public float moveSpeed;
     public float jumpPower;
     public float dodgePower;
+    public float dodgeAmount;
     public float rotateSpeed;
     public float minRotationSpeed;
 
     private float v = 0f;
     private float h = 0f;
-    public float hp = 100f;
+    public  float hp = 100f;
     private bool defence = false;
     private bool attack = false;
     private bool isTryJump = false;
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
         layermask = 1 << LayerMask.NameToLayer("Terrain");
     }
     void Awake(){
+        agent.speed = moveSpeed;
     }
     void Update()
     {
@@ -74,7 +78,8 @@ public class Player : MonoBehaviour
         if (V != 0 || H != 0)
         {
             // Debug.Log(targetDirection * moveSpeed);
-            playerRigid.MovePosition(transform.position + (targetDirection * Time.deltaTime * moveSpeed));
+            agent.destination = transform.position + targetDirection;
+            // playerRigid.MovePosition(transform.position + (targetDirection * Time.deltaTime * moveSpeed));
         }
     }
     public void Turn() { // function - 카메라 기준 Player 회전
@@ -90,7 +95,10 @@ public class Player : MonoBehaviour
         playerRigid.AddForce(transform.up * jumpPower, ForceMode.Impulse);
     }
     public void TryDodge(){// function - 캐릭터 dodge ,StopPlayerCoroutine로 종료 - 애니메이션Exit에서 호출
-        transform.rotation = Quaternion.LookRotation(CameraFromDirection());
+        Vector3 dir = CameraFromDirection();
+        Vector3 newdir = dir == Vector3.zero ? transform.forward : dir;
+        transform.rotation = Quaternion.LookRotation(dir);
+
         dodgeCoroutine = PlayerDodge();
         StartCoroutine(dodgeCoroutine);
     }
@@ -113,7 +121,8 @@ public class Player : MonoBehaviour
     private IEnumerator PlayerDodge(){ // function - addforce하면 rigidbody 중력때문에 방향이 자꾸 변경되어 추가
         while (true)
         {
-            playerRigid.MovePosition(transform.position + (transform.forward * dodgePower * Time.deltaTime));
+            agent.destination = transform.position + (transform.forward * dodgeAmount);
+            // playerRigid.MovePosition(transform.position + (transform.forward * dodgePower * Time.deltaTime));
             yield return null;
         }
     }
@@ -121,6 +130,7 @@ public class Player : MonoBehaviour
         // TODO - FUNCTION 이벤트 위치 조정이 필요함
         // Debug.Log("WalkForwardStep");
     }
+    
     // events
     private void OnCollisionEnter(Collision other) {
         if (other.collider != null && other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
@@ -133,7 +143,7 @@ public class Player : MonoBehaviour
     }
     public void OnAttack(Collider other){ // call by waepon OnTriggerEnter
         if(other.gameObject.tag == "Monster"){
-            Debug.Log($"Attack : {other.gameObject.name}");
+            
         }
     }
 }

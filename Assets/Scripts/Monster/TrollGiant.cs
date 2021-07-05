@@ -14,8 +14,9 @@ public class TrollGiant : NavMonster
     }
     public override void RunUpdate()
     {
-        AttackWhenClose();
+        // TryAttackWhenClose();
     }
 
     // custom functions
+
 }

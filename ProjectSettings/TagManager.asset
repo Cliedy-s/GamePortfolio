@@ -9,6 +9,7 @@ TagManager:
   - Terrain
   - Monster
   - Stepable
+  - Weapon
   layers:
   - Default
   - TransparentFX
