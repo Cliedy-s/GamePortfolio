@@ -14,9 +14,19 @@ public class TrollGiant : NavMonster
     }
     public override void RunUpdate()
     {
-        // TryAttackWhenClose();
+        
     }
 
     // custom functions
 
+    // Events
+    private void OnCollisionEnter(Collision other)
+    {
+        // TODO - 맞고 때리는거 구현하기
+        Debug.Log("attaced...?");
+        if (other.gameObject.tag == "Weapon")
+        {
+            Debug.Log("Attacked!");
+        }
+    }
 }

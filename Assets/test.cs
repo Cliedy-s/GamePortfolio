@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    public Animator ani;
-    public TrollGiant troll;
+    public Player player;
     void Update()
     {
-        Debug.Log($"troll.IsMoving troll.IsAttacked troll.IsHitDis troll.IsTryHit troll.IsDie ");
-        Debug.Log($"{troll.IsMoving}{troll.IsAttacked}{troll.IsHitDis}{troll.IsTryHit}{troll.IsDie}");
-        // Debug.Log(ani.GetInteger("aniIndex"));
     }
     // custom functions
 }

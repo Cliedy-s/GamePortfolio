@@ -1,8 +1,10 @@
 using System;
 using TreeEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.ProBuilder;
+using UnityEngine.SubsystemsImplementation;
 
 public abstract class NavMonster : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public abstract class NavMonster : MonoBehaviour
     public float hitDis = 1f;
     [Space(3f)]
     public int totalHp = 100;
+    public int hp = 100;
 
     protected Vector3 orgDir;
     // protected Vector3 beforeDir;
@@ -29,21 +32,12 @@ public abstract class NavMonster : MonoBehaviour
     private bool isHitDis = false;
     private bool isTryHit = false;
     private bool isDie = false;
-    private int hp = 100;
 
     public  bool IsMoving { get => isMoving; set => isMoving = value; }
     public  bool IsAttacked { get => isAttacked; set => isAttacked = value; }
-    public  bool IsHitDis { get => isHitDis; set => isHitDis = value; }
-    public  bool IsTryHit { get => isTryHit; set => isTryHit = value; }
+    public  bool IsHitDis { get => isHitDis; set => isHitDis = value; } // 공격한다
+    public  bool IsTryHit { get => isTryHit; set => isTryHit = value; } // 공격중인가?
     public  bool IsDie    { get => isDie; set => isDie = value; }
-    public  int Hp { 
-        get {
-            return hp;
-        } 
-        set {
-            hp = value;
-        } 
-    }   
 
     // unity functions
     void Awake(){
@@ -55,10 +49,11 @@ public abstract class NavMonster : MonoBehaviour
         RunStart();
     }
     void Update(){
-        Debug.Log(isMoving);
         playerDis = Vector3.Distance(player.transform.position, transform.position);
-        RunUpdate();
         DetectSpeed();
+        TryAttackWhenClose();
+
+        RunUpdate();
     }
     abstract public void RunAwake();
     abstract public void RunStart();
@@ -85,6 +80,12 @@ public abstract class NavMonster : MonoBehaviour
         else
             IsMoving = true;
     }
+    public    void SetRotate(){
+        Quaternion _qua = Quaternion.LookRotation(player.transform.position - transform.position);
+        Vector3 _euler = _qua.eulerAngles;
+        _euler.x = 0;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(_euler), 10f * Time.deltaTime);
+    }
     private   void SetDir(Vector3 targetDir){
         agent.destination = targetDir;
     }
@@ -97,8 +98,8 @@ public abstract class NavMonster : MonoBehaviour
     protected void GotHit(int hpPoint){
         IsAttacked = true;
         MovingPause();
-        Hp = Hp - hpPoint;
-        if(Hp <= 0){
+        hp = hp - hpPoint;
+        if(hp <= 0){
             Invoke("Die", hitTime);
             IsDie = true;
             return;
@@ -125,13 +126,7 @@ public abstract class NavMonster : MonoBehaviour
     protected void Die(){
         IsDie = true;
     }
-   // Events
-    private   void OnCollisionEnter(Collision other) {
-        Debug.Log("attaced...?");
-        if(other.gameObject.tag == "Weapon"){
-            Debug.Log("Attacked!");
-        }
-    }
+
 
 }
 

@@ -46,9 +46,8 @@ public class RigidbodyMovement : MonoBehaviour
         }
         
     }
-    private void OnCollisionEnter(Collision other) {
-        // TODO - 다른 콜라이더에 닿아도 점프 가능함 (수정 필요)
-        jcount = jumpCount;
-    }
+    // private void OnCollisionEnter(Collision other) {
+    //     jcount = jumpCount;
+    // }
     // custom functions
 }

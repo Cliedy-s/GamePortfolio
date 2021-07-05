@@ -6583,6 +6583,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1494372133}
     m_Modifications:
+    - target: {fileID: 1159661926, guid: 6932ae6b8295c24468a3587ff8cf1e79, type: 3}
+      propertyPath: m_Speed
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1159661926, guid: 6932ae6b8295c24468a3587ff8cf1e79, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 208709617910941361, guid: 6932ae6b8295c24468a3587ff8cf1e79, type: 3}
       propertyPath: m_Name
       value: TrollGiantLow
@@ -6630,6 +6638,10 @@ PrefabInstance:
     - target: {fileID: 697685097045449739, guid: 6932ae6b8295c24468a3587ff8cf1e79, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5008170657704403706, guid: 6932ae6b8295c24468a3587ff8cf1e79, type: 3}
+      propertyPath: hitDis
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5008170657704403706, guid: 6932ae6b8295c24468a3587ff8cf1e79, type: 3}
       propertyPath: minDis

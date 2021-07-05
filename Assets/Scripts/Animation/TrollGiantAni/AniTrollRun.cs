@@ -10,7 +10,6 @@ public class AniTrollRun : AniBase<TrollGiant>
     public override void StateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }
-    int aniIndex = 0;
     public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         baseObj.DetectPlayer();
