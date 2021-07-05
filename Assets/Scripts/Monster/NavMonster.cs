@@ -55,8 +55,10 @@ public abstract class NavMonster : MonoBehaviour
         RunStart();
     }
     void Update(){
+        Debug.Log(isMoving);
         playerDis = Vector3.Distance(player.transform.position, transform.position);
         RunUpdate();
+        DetectSpeed();
     }
     abstract public void RunAwake();
     abstract public void RunStart();
@@ -75,11 +77,13 @@ public abstract class NavMonster : MonoBehaviour
         else if(playerDis <= maxDis){ // 따라가기
             targetDir = player.transform.position;
         }
-        // TODO -  트롤이 이상하게 움직임
-        if(targetDir == transform.position)
-            MovingPause();
-        else Moving();
         SetDir(targetDir);
+    }
+    private   void DetectSpeed(){
+        if(agent.velocity == Vector3.zero)
+            IsMoving = false;
+        else
+            IsMoving = true;
     }
     private   void SetDir(Vector3 targetDir){
         agent.destination = targetDir;

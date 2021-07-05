@@ -61,11 +61,11 @@ public class Player : MonoBehaviour
         attack = Input.GetMouseButton(0);
         isTryJump = false;
         isTryDodge = false;
-        if(isGround){
-            if (Input.GetButton("Jump"))
-            { // jump
-                isTryJump = true;
-            }
+        if(isGround){ 
+            // if (Input.GetButton("Jump"))
+            // { // jump
+            //     isTryJump = true;
+            // }
             if (Input.GetButton("Avoid"))
             { // avoid
                 isTryDodge = true;
@@ -90,10 +90,10 @@ public class Player : MonoBehaviour
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, rotateSpeed * Time.deltaTime, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
-    public void TryJump(){// function -  캐릭터 jump
-        isGround = false;
-        playerRigid.AddForce(transform.up * jumpPower, ForceMode.Impulse);
-    }
+    // public void TryJump(){// function -  캐릭터 jump
+    //     isGround = false;
+    //     playerRigid.AddForce(transform.up * jumpPower, ForceMode.Impulse);
+    // }
     public void TryDodge(){// function - 캐릭터 dodge ,StopPlayerCoroutine로 종료 - 애니메이션Exit에서 호출
         Vector3 dir = CameraFromDirection();
         Vector3 newdir = dir == Vector3.zero ? transform.forward : dir;

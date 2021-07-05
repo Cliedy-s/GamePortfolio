@@ -18,14 +18,13 @@ public class AniTrollAtk01 : AniBase<TrollGiant>
     public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (baseObj.IsMoving)
-            aniIndex = 0;
+            animator.SetInteger("aniIndex", 0);
         if (baseObj.IsHitDis)
-            aniIndex = 2;
+            animator.SetInteger("aniIndex", 2);
         if (baseObj.IsAttacked)
-            aniIndex = 3;
+            animator.SetInteger("aniIndex", 3);
         if (baseObj.IsDie)
-            aniIndex = 4;
+            animator.SetInteger("aniIndex", 4);
 
-        animator.SetInteger("aniIndex", aniIndex);
     }
 }

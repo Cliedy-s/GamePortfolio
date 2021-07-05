@@ -6,7 +6,7 @@ public class AniDogJump : AniDogBase
 {
     public override void StateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player.TryJump();
+        // player.TryJump();
     }
     public override void StateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

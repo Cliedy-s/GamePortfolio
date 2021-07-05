@@ -15,15 +15,13 @@ public class AniTrollRun : AniBase<TrollGiant>
     {
         baseObj.DetectPlayer();
         if (!baseObj.IsMoving)
-            aniIndex = 0;
+            animator.SetInteger("aniIndex", 0);
         if (baseObj.IsHitDis)
-            aniIndex = 2;
+            animator.SetInteger("aniIndex", 2);
         if (baseObj.IsAttacked)
-            aniIndex = 3;
+            animator.SetInteger("aniIndex", 3);
         if (baseObj.IsDie)
-            aniIndex = 4;
+            animator.SetInteger("aniIndex", 4);
 
-        Debug.Log(aniIndex);
-        animator.SetInteger("aniIndex", aniIndex);
     }
 }
