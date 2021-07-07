@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Specialized;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -132,19 +133,26 @@ public class Player : MonoBehaviour
     }
     
     // events
-    private void OnCollisionEnter(Collision other) {
-        if (other.collider != null && other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+    // private void OnCollisionEnter(Collider other) {
+    //     if (other.collider != null && other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+    //     {
+    //         if (!isGround)
+    //         {
+    //             isGround = true;
+    //         }
+    //     }
+    // }
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "MonsterWeapon")
         {
-            if (!isGround)
-            {
-                isGround = true;
-            }
+            OnAttacked(other);
         }
     }
     public void OnAttack(Collider other){ // call by waepon OnTriggerEnter
-        if(other.gameObject.tag == "Monster"){
-            
-        }
+        Debug.Log($"Player - Attack : {other.gameObject.tag}");
+    }
+    public void OnAttacked(Collider other){
+        Debug.Log($"Player - Attacked : {other.gameObject.tag}");
     }
 }
 

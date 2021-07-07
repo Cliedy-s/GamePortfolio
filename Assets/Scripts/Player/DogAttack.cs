@@ -9,7 +9,7 @@ public class DogAttack : MonoBehaviour
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
 
     private void OnTriggerEnter(Collider other) {
-        if(IsAttacking)
+        if (IsAttacking && other.gameObject.tag == "Monster")
             player.OnAttack(other);
     }
 }

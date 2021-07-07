@@ -8,7 +8,7 @@ public class TrollAttack : MonoBehaviour
     // events
     private void OnTriggerEnter(Collider other)
     {
-        if (troll.IsTryHit)
+        if (troll.IsTryHit && other.gameObject.tag == "Player")
             troll.OnAttack(other);
     }
 }

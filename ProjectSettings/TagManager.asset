@@ -10,6 +10,7 @@ TagManager:
   - Monster
   - Stepable
   - Weapon
+  - MonsterWeapon
   layers:
   - Default
   - TransparentFX

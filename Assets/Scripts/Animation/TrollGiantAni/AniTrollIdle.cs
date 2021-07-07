@@ -14,7 +14,6 @@ public class AniTrollIdle : AniBase<TrollGiant>
 
     }
 
-    int aniIndex = 0;
     public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         baseObj.DetectPlayer();

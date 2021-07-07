@@ -11,8 +11,7 @@ public class AniTrollHit : AniBase<TrollGiant>
     public override void StateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }
-
-    int aniIndex = 0;
+    
     public override void StateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (!baseObj.IsMoving)

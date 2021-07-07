@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour
     public float mouseSensitive;
     public float cameraDefaultDistance = 3;
     public Vector3 cameraOffset;
+    [Range(0, 1)]
+    public float avoidDisPs;
 
-    List<NavMonster> monsters = new List<NavMonster>();
+    List<TrollGiant> monsters = new List<TrollGiant>();
     
     public Player Player { get => player; set => player = value; }
-    public List<NavMonster> Monsters { get => monsters; set => monsters = value; }
+    public List<TrollGiant> Monsters { get => monsters; set => monsters = value; }
 
     // unity functions
     void Awake() {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         cam.DefaultDistance = cameraDefaultDistance;
         cam.CameraOffset = cameraOffset;
         cam.Player = player.transform;
+        cam.AvoidDisPs = avoidDisPs;
     }
     void Start()
     {

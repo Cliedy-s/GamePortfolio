@@ -4,10 +4,16 @@ using UnityEditor;
 using System.IO;
 using System;
 
-public class SaveTerrainData 
+public class SaveTerrainData : EditorWindow
 {
     static string filename;
     static List<string> buildinglist;
+
+    [MenuItem("Custom/Tool")]
+    static void Init(){
+        SaveTerrainData window = (SaveTerrainData)EditorWindow.GetWindow(typeof(SaveTerrainData));
+        window.Show();
+    }
 
     [MenuItem("Custom/Save")]
     static void Save()
